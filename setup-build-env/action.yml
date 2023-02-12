@@ -1,6 +1,9 @@
 name: 'setup build env'
 description: 'Setup build env'
 inputs:
+  arch:
+    description: 'arch'
+    required: true
   pahole:
     description: 'pahole rev/tag/branch'
     required: true
@@ -36,4 +39,4 @@ runs:
     - name: Install cross compiler
       shell: bash
       run: |
-        ${GITHUB_ACTION_PATH}/install_cross_compiler.sh
+        ARCH="${{ inputs.arch }}" ${GITHUB_ACTION_PATH}/install_cross_compiler.sh
