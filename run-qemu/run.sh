@@ -58,6 +58,13 @@ aarch64)
 	kvm_accel="-cpu host -enable-kvm -machine virt,gic-version=3,accel=kvm:tcg"
 	tcg_accel="-cpu cortex-a72 -machine virt,accel=tcg"
 	;;
+riscv64)
+	qemu="qemu-system-riscv64"
+	console="ttyS0"
+	smp=$(nproc)
+	kvm_accel="-machine virt"
+	tcg_accel="-machine virt"
+	;;
 
 *)
 	echo "Unsupported architecture"
