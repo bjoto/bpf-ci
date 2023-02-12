@@ -41,18 +41,20 @@ fi
 
 sudo apt-get update
 sudo apt-get install --yes --no-install-recommends \
-     g++-$ARCH-linux-gnu \
-     gcc-$ARCH-linux-gnu
+	g++-$ARCH-linux-gnu \
+	gcc-$ARCH-linux-gnu
 
 
 sudo apt-get install --yes --no-install-recommends \
-        libasound2-dev:$ARCH \
-        libc6-dev:$ARCH \
-        libcap-dev:$ARCH \
-        libcap-ng-dev:$ARCH \
-        libelf-dev:$ARCH \
-        libmnl-dev:$ARCH \
-        libnuma-dev:$ARCH \
-        libpopt-dev:$ARCH
+	libasound2-dev:$ARCH \
+	libc6-dev:$ARCH \
+	libcap-dev:$ARCH \
+	libcap-ng-dev:$ARCH \
+	libelf-dev:$ARCH \
+	libmnl-dev:$ARCH \
+	libnuma-dev:$ARCH \
+	libpopt-dev:$ARCH \
+	libssl-dev:$ARCH \
+	zlib1g-dev:$ARCH
 
 foldable end install_cross_compiler
