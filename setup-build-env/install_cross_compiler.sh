@@ -17,23 +17,27 @@ if [[ $(uname -m) != "x86_64" ]]; then
 	exit 1
 fi
 
-sudo sed -i 's/^deb/deb [arch=amd64]/g' /etc/apt/sources.list
-
 # Translate to dpkg arch name
 debarch=$ARCH
 case "$ARCH" in
 aarch64)
 	debarch=arm64
+	;;
 *)
 	;;
 esac
 
 sudo dpkg --add-architecture $debarch
-cat <<EOF | sudo tee -a /etc/apt/sources.list
+
+if [[ $debarch == "riscv64" ]]; then
+    	# RISC-V is still an ubuntu-port
+	sudo sed -i 's/^deb/deb [arch=amd64]/g' /etc/apt/sources.list
+	cat <<EOF | sudo tee -a /etc/apt/sources.list
 deb [arch=$debarch signed-by="/usr/share/keyrings/ubuntu-archive-keyring.gpg"] http://ports.ubuntu.com/ubuntu-ports $(lsb_release -c -s) main
 deb [arch=$debarch signed-by="/usr/share/keyrings/ubuntu-archive-keyring.gpg"] http://ports.ubuntu.com/ubuntu-ports $(lsb_release -c -s)-updates main
 deb [arch=$debarch signed-by="/usr/share/keyrings/ubuntu-archive-keyring.gpg"] http://ports.ubuntu.com/ubuntu-ports $(lsb_release -c -s)-security main
 EOF
+fi
 
 sudo apt-get update
 sudo apt-get install --yes --no-install-recommends \
