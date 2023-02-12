@@ -16,20 +16,20 @@ if [ $? -eq 0 ]; then
 fi
 
 if [[ $(uname -m) != "$TARGETARCH" ]]; then
-    # Cross-compiling
-    local linuxarch="$TARGETARCH"
-    case "$ARCH" in
+	# Cross-compiling
+	local linuxarch="$TARGETARCH"
+	case "$TARGETARCH" in
 	riscv64)
-	    linuxarch="riscv"
-	    ;;
+		linuxarch="riscv"
+		;;
 	aarch64)
-	    linuxarch="arm64"
-	    ;;
+		linuxarch="arm64"
+		;;
 	*)
-	    ;;
-    esac
-    	export ARCH="$linux-arch"
-    	export CROSS_COMPILE="$TARGETARCH-linux-gnu-"
+		;;
+	esac
+	export ARCH="$linuxarch"
+	export CROSS_COMPILE="$TARGETARCH-linux-gnu-"
 fi
 
 foldable start build_kernel "Building kernel with $TOOLCHAIN"
