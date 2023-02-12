@@ -17,7 +17,7 @@ fi
 
 if [[ $(uname -m) != "$TARGETARCH" ]]; then
 	# Cross-compiling
-	local linuxarch="$TARGETARCH"
+	linuxarch="$TARGETARCH"
 	case "$TARGETARCH" in
 	riscv64)
 		linuxarch="riscv"
