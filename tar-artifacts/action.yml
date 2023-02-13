@@ -18,7 +18,5 @@ runs:
   steps:
     - name: Tar artifacts
       shell: bash
-      env:
-        ARCH: ${{ inputs.arch }}
       run: |
         ${{ github.action_path }}/tar-artifacts.sh '${{ inputs.arch }}' '${{ inputs.github-repo }}' '${{ inputs.toolchain }}' '${{ inputs.kbuild-output }}'
