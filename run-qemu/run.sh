@@ -90,12 +90,22 @@ if [[ ${img_fs} == "tmpfs" ]]; then
 	CACHE_OPT=""
 fi
 
+if [[ ${ARCH} == "riscv64" ]]; then
+    vmlinuz_orig="$VMLINUZ"
+    VMLINUZ=$(mktemp)
+    cat $vmlinuz_orig | gunzip > $VMLINUZ
+fi
+
 "$qemu" -nodefaults --no-reboot -nographic \
   -chardev stdio,id=char0,mux=on,signal=off,logfile=boot.log \
   -serial chardev:char0 \
   ${accel} -smp "$smp" -m 8G \
   -drive file="$IMG",format=raw,index=1,media=disk,if=virtio${CACHE_OPT} \
   -kernel "$VMLINUZ" -append "root=/dev/vda rw console=$console panic=-1 sysctl.vm.panic_on_oom=1 $APPEND"
+
+if [[ ${ARCH} == "riscv64" ]]; then
+    rm $VMLINUZ
+fi
 
 exitfile="${bpftool_exitstatus}\n"
 exitfile+="$(guestfish --ro -a "$IMG" -i cat /exitstatus 2>/dev/null)"
