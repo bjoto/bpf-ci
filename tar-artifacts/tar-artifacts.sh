@@ -40,7 +40,7 @@ fi
 # zstd is installed by default in the runner images.
 tar -cf - \
 	"${KBUILD_OUTPUT}"/.config \
-	"${KBUILD_OUTPUT}"/$(KBUILD_OUTPUT="${KBUILD_OUTPUT}" make ${ARCH} -s image_name) \
+	"${KBUILD_OUTPUT}"/$(KBUILD_OUTPUT="${KBUILD_OUTPUT}" make ARCH=${ARCH} -s image_name) \
 	"${KBUILD_OUTPUT}"/include/config/auto.conf \
 	"${KBUILD_OUTPUT}"/include/generated/autoconf.h \
 	"${KBUILD_OUTPUT}"/vmlinux \
