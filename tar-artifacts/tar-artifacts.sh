@@ -6,7 +6,7 @@ TOOLCHAIN=$3
 KBUILD_OUTPUT=$4
 
 ARCH=$(echo ${TARGETARCH} | sed 's/x86_64/x86/' | sed 's/s390x/s390/' | \
-	sed 's/aarch64/arm64/' | sed 's/riscv64/riscv/)'
+	sed 's/aarch64/arm64/' | sed 's/riscv64/riscv/')
 
 
 CROSS_COMPILE=""
