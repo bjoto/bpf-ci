@@ -8,7 +8,6 @@ KBUILD_OUTPUT=$4
 ARCH=$(echo ${TARGETARCH} | sed 's/x86_64/x86/' | sed 's/s390x/s390/' | \
 	sed 's/aarch64/arm64/' | sed 's/riscv64/riscv/')
 
-
 CROSS_COMPILE=""
 if [[ $(uname -m) != "$TARGETARCH" ]]; then
 	CROSS_COMPILE="$TARGETARCH-linux-gnu-"
@@ -39,7 +38,7 @@ fi
 # zstd is installed by default in the runner images.
 tar -cf - \
 	"${KBUILD_OUTPUT}"/.config \
-	"${KBUILD_OUTPUT}"/$(KBUILD_OUTPUT="${KBUILD_OUTPUT}" make -s image_name) \
+	"${KBUILD_OUTPUT}"/$(KBUILD_OUTPUT="${KBUILD_OUTPUT}" make ${ARCH} -s image_name) \
 	"${KBUILD_OUTPUT}"/include/config/auto.conf \
 	"${KBUILD_OUTPUT}"/include/generated/autoconf.h \
 	"${KBUILD_OUTPUT}"/vmlinux \
