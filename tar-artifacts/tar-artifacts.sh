@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 TARGETARCH=$1
 GH_REPO=$2
 TOOLCHAIN=$3
