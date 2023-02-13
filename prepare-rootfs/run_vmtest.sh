@@ -27,7 +27,7 @@ VMTEST_SETUPCMD="export GITHUB_WORKFLOW=${GITHUB_WORKFLOW:-}; export PROJECT_NAM
 setup_cmd=$(sed 's/\([[:space:]]\)/\\\1/g' <<< "${VMTEST_SETUPCMD}")
 
 if [[ "${KERNEL}" = 'LATEST' ]]; then
-  "${THISDIR}"/run.sh --build "${KBUILD_OUTPUT}" --source "${KERNEL_ROOT}" -o -d ~ -s "${setup_cmd}" "${IMAGE}"
+  sudo "${THISDIR}"/run.sh --build "${KBUILD_OUTPUT}" --source "${KERNEL_ROOT}" -o -d ~ -s "${setup_cmd}" "${IMAGE}"
 else
   "${THISDIR}"/run.sh -k "${KERNEL}*" -o -d ~ -s "${setup_cmd}" "${IMAGE}"
 fi
