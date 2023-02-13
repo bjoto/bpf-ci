@@ -64,7 +64,7 @@ else
 fi
 
 make olddefconfig
-make -j $(kernel_build_make_jobs) all V=1 || (
+make -j $(kernel_build_make_jobs) all || (
   echo "Build failed; falling back to full rebuild"
   make clean; make -j $(kernel_build_make_jobs) all
 )

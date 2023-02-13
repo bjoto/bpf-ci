@@ -54,7 +54,7 @@ make \
 	LLC=llc-${LLVM_VER} \
 	LLVM_STRIP=llvm-strip-${LLVM_VER} \
 	VMLINUX_BTF="${KBUILD_OUTPUT}/vmlinux" \
-	VMLINUX_H="${VMLINUX_H}" V=1 \
+	VMLINUX_H="${VMLINUX_H}" \
 	-C "${REPO_ROOT}/${REPO_PATH}/tools/testing/selftests/bpf" \
 	-j $(kernel_build_make_jobs)
 cd -
